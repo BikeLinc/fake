@@ -3,21 +3,12 @@
 int main(const int argc, const char** argv) {
     // Generate Symbols
     Parser parser("Fakefile");
-
-    if(parser.getRules().size() == 0) {
-        std::cout << "fake: *** No targets. Stop." << std::endl;
-        exit(2);
-    }
-
-    // Execute target if arguments
-    if(argc == 2) {
-        Compiler compiler(parser.getRules());
-        compiler.executeRule(argv[1]);
-    // Execute all rules and dependencies
-    } else {
-        Compiler compiler(parser.getRules());
-        compiler.executeAllRules();
-    }
+    
+    // Load Symbols
+    Compiler compiler(parser.getRules());
+    
+    // Execute Symbols
+    compiler.execute(argc, argv);
 
     return 0;
 }

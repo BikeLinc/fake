@@ -1,6 +1,21 @@
-// FakefileParser.cpp
-// By Chloe Walsh
-// 11/7/21
+/**
+ * File:            Parser.cpp
+ *
+ * Author:          Chloe Walsh
+ * Date Created:    11/7/21
+ *
+ * Purpose:         Itentify symbols in a Fakefile and generate a
+ *                  list of Rules and Variables.
+ *
+ * Description:     To generate a list of symbols this class first
+ *                  loops through all characters in the file and
+ *                  detects specific symbols (=, ", : ,$, ( or ), { or })
+ *
+ * Public Methods:  Parser(filepath)    -> Generates all symbols found in file
+ *                  getVariables()      -> Returns a std::vector of variables generated
+ *                  getRules()          -> Returns a std::vector of rules generated
+ *
+ */
 
 #include "Parser.h"
 

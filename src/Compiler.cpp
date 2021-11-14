@@ -1,11 +1,41 @@
+/**
+ * File:            Compiler.cpp
+ *
+ * Author:          Chloe Walsh
+ * Date Created:    11/7/21
+ *
+ * Purpose:         Facilitate the preparation and execution of Rules
+ *
+ * Description:     To prepare rules for execution, the compiler identifies references
+ *                  and substitues the variable value before making the system(command)
+ *                  call.
+ *
+ * Public Methods:  Compiler()          -> Set the member rules variable to paramater input
+ *                  executeAllRules()   -> Execute all rules in order based on dependencies
+ *                  executeRule()       -> Execute specific rule and dependencies
+ *
+ */
+
 #include "Compiler.h"
 #include "Object.h"
 
 
 Compiler::Compiler(std::vector<Rule> rules) {
-    this->rules = rules;    
+    this->rules = rules;
+    if(rules.size() == 0) {
+        std::cout << "fake: *** No targets. Stop." << std::endl;
+        exit(2);
+    }
 }
 
+void Compiler::execute(const int argc, const char** argv) {
+	if(argc == 2) {
+        executeRule(argv[1]);
+    // Execute all rules and dependencies
+    } else {
+        executeAllRules();
+    }
+}
 
 void Compiler::executeAllRules() {
 	bool complete = false;
@@ -71,7 +101,7 @@ bool Compiler::checkRuleExists(std::string ruleName, std::string caller) {
 		}
 	}
 	if(!ruleDefinitionPresent) {
-		std::cout << "fake: *** No ruleName to make target \'" << ruleName << "\', needed by \'" << caller << "\'. Stop." << std::endl;
+		std::cout << "fake: *** No rule to make target \'" << ruleName << "\', needed by \'" << caller << "\'. Stop." << std::endl;
 		std::vector<std::string> empty;
 		std::vector<Variable> vars;
 		Rule rule(caller,0, empty, empty, vars);
