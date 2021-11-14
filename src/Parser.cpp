@@ -4,10 +4,13 @@
 
 #include "Parser.h"
 
+// Trigger parser() with filepath
 Parser::Parser(const char* filepath) {
     parse(filepath);
-    }
+}
 
+
+// All parsing happens in this function, it just calls the helper functions below
 void Parser::parse(const char* filepath) {
     std::ifstream file(filepath);
     std::string str;
@@ -81,8 +84,6 @@ void Parser::storeBufferAinB() {
     bufferA = "";
 }
 
-// ==== Variable Creation ====
-
 void Parser::beginVariable() {
     storeBufferAinB();
     variableMode = true;
@@ -111,8 +112,6 @@ void Parser::endVariable() {
     bufferB = "";
     bufferA = "";
 }
-
-// ==== Rule Creation ====
 
 void Parser::beginRule() {
     ruleMode = true;
@@ -178,36 +177,4 @@ void Parser::addDependencies() {
             bufferA = "";
         }
     }
-}
-
-// ==== Reference Creation ====
-
-void Parser::beginReference() {
-    referenceMode = true;
-    storeBufferAinB();
-}
-
-void Parser::toggleReferenceDefinitionMode() {
-    if(referenceDefinitionMode) {
-        referenceDefinitionMode = false;
-        endReference();
-    } else {
-        referenceDefinitionMode = true;
-    }
-    
-}
-
-void Parser::endReference() {
-   referenceMode = false;
-   std::string refValue = "";
-   
-   for(auto& var : variables) {
-       if(bufferA == var.name) {
-           refValue = var.value;
-       }
-   }
-   
-   bufferA = bufferB;
-   bufferA += refValue;
-   bufferB = "";
 }

@@ -1,2 +1,2 @@
 all:
-	g++ main.cpp Parser.cpp Compiler.cpp -o fake -std=c++11
+	g++ ./src/main.cpp ./src/Parser.cpp ./src/Compiler.cpp -o fake -std=c++11

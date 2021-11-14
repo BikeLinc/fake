@@ -1,3 +1,5 @@
+#ifndef COMPILER_H
+#define COMPILER_H
 
 #include "Object.h"
 
@@ -15,3 +17,5 @@ class Compiler {
         bool isRuleCompleted(std::string rule);
         bool isReady(Rule rule);
 };
+
+#endif /* COMPILER_H */
