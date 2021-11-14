@@ -121,7 +121,7 @@ struct Rule {
                 if(commandExitCode != 0) {
                     std::cout << "Fakefile:" << (commandNumber + definitionLine) << ": recipe for target \'" << name << "\' failed" << std::endl;
                     std::cout << "fake: *** [" << name << "] error " << commandExitCode << std::endl;
-                    exit(commandExitCode);
+                    exit(2);
                 }
                 commandNumber++;
             }

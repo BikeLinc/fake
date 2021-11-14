@@ -22,10 +22,6 @@
 
 Compiler::Compiler(std::vector<Rule> rules) {
     this->rules = rules;
-    if(rules.size() == 0) {
-        std::cout << "fake: *** No targets. Stop." << std::endl;
-        exit(2);
-    }
 }
 
 void Compiler::execute(const int argc, const char** argv) {
@@ -38,6 +34,11 @@ void Compiler::execute(const int argc, const char** argv) {
 }
 
 void Compiler::executeAllRules() {
+    if(rules.size() == 0) {
+        std::cout << "fake: *** No targets. Stop." << std::endl;
+        exit(2);
+    }
+    
 	bool complete = false;
 	
     while(!complete) {
@@ -66,6 +67,10 @@ void Compiler::executeAllRules() {
 
 // Execute individual rule
 void Compiler::executeRule(std::string rule) {
+    if(rules.size() == 0) {
+        std::cout << "fake: *** No targets. Stop." << std::endl;
+        exit(2);
+    }
     bool present = false;
 
     for(auto& rulePresent : rules) {
